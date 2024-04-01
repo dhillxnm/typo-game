@@ -5,204 +5,131 @@
 /*----------------------------------- */
 
 import { select, listen, getElement, selectAll, create } from './utils.js';
+import { Score } from './score.js';
 
+const startButton = document.getElementById('start-btn');
+const hitsDisplay = document.getElementById('hits');
+const timerDisplay = document.getElementById('timer');
+const wordInput = document.getElementById('word-input');
+const wordDisplay = document.getElementById('word');
 
+const words = ['dinosaur', 'love', 'pineapple', 'calendar', 'robot', 'building', 'population',
+'weather', 'bottle', 'history', 'dream', 'character', 'money', 'absolute',
+'discipline', 'machine', 'accurate', 'connection', 'rainbow', 'bicycle',
+'eclipse', 'calculator', 'trouble', 'watermelon', 'developer', 'philosophy',
+'database', 'periodic', 'capitalism', 'abominable', 'component', 'future',
+'pasta', 'microwave', 'jungle', 'wallet', 'canada', 'coffee', 'beauty', 'agency',
+'chocolate', 'eleven', 'technology', 'alphabet', 'knowledge', 'magician',
+'professor', 'triangle', 'earthquake', 'baseball', 'beyond', 'evolution',
+'banana', 'perfumer', 'computer', 'management', 'discovery', 'ambition', 'music',
+'eagle', 'crown', 'chess', 'laptop', 'bedroom', 'delivery', 'enemy', 'button',
+'superman', 'library', 'unboxing', 'bookstore', 'language', 'homework',
+'fantastic', 'economy', 'interview', 'awesome', 'challenge', 'science', 'mystery',
+'famous', 'league', 'memory', 'leather', 'planet', 'software', 'update', 'yellow',
+'keyboard', 'window'];
 
+let timer;
+let hits = 0;
+let remainingTime = 99;
+let backgroundMusic;
+let gameStarted = false; // Track if the game has started
 
+startButton.addEventListener('click', startGame);
 
-// Selectors
-const word = document.getElementById("word");
-const text = document.getElementById("text");
-const scoreElement = document.getElementById("score");
-const timeElement = document.getElementById("time");
-const endGameElement = document.getElementById("end-game-container");
-const settingBtn = document.getElementById("settings-btn");
-const settings = document.getElementById("settings");
-const difficultySelect = document.getElementById("difficulty");
+function startGame() {
+  if (!gameStarted) {
+      // First time starting the game
+      gameStarted = true;
+      startButton.textContent = 'Restart';
 
-// list of words for game
-const words = [
-  "came",
-  "come",
-  "letter",
-  "end",
-  "I",
-  "all",
-  "number",
-  "oil",
-  "within",
-  "now",
-  "right",
-  "feet",
-  "leave",
-  "what",
-  "now",
-  "fall",
-  "came",
-  "live",
-  "year",
-  "about",
-  "got",
-  "came",
-  "set",
-  "were",
-  "follow",
-  "study",
-  "day",
-  "eye",
-  "over",
-  "why",
-  "why",
-  "talk",
-  "soon",
-  "because",
-  "eye",
-  "watch",
-  "year",
-  "her",
-  "any",
-  "by",
-  "I",
-  "both",
-  "around",
-  "book",
-  "line",
-  "mother",
-  "open",
-  "now",
-  "that",
-  "mile",
-  "go",
-  "by",
-  "found",
-  "said",
-  "eye",
-  "come",
-  "so",
-  "place",
-  "food",
-  "got",
-  "city",
-  "always",
-  "these",
-  "any",
-  "use",
-  "been",
-  "was",
-  "read",
-  "their",
-  "without",
-  "as",
-  "change",
-  "leave",
-  "can",
-  "they",
-  "those",
-  "eat",
-  "never",
-  "no",
-  "eat",
-  "story",
-];
+      // Remove the clock icon
+      const clockIcon = document.querySelector('.clock i.fa-regular.fa-clock');
+      if (clockIcon) {
+          clockIcon.remove();
+      }
 
-// Init word
-let randomWord;
-
-// Init score
-let score = 0;
-
-// Init time
-let time = 10;
-
-// Set difficulty
-let difficulty =
-  localStorage.getItem("difficulty") !== null
-    ? localStorage.getItem("difficulty")
-    : "medium";
-
-// set difficulty select value
-difficultySelect.value =
-  localStorage.getItem("difficulty") !== null
-    ? localStorage.getItem("difficulty")
-    : "medium";
-
-// focus on text on start
-text.focus();
-
-// count down
-const timeInterval = setInterval(updateTime, 1000);
-
-// Random words generator from Array
-function getRandomWord() {
-  return words[Math.floor(Math.random() * words.length)];
-}
-
-// add word to DOM
-function addWordToDOM() {
-  randomWord = getRandomWord();
-  word.innerHTML = randomWord;
-}
-
-// update score
-function updateScore() {
-  score++;
-  scoreElement.innerHTML = score;
-}
-
-// update time
-function updateTime() {
-  time--;
-  timeElement.innerHTML = time + "s";
-
-  if (time === 0) {
-    clearInterval(timeInterval);
-
-    //   game over
-    gameOver();
+      // Add background class to .clock element
+      document.querySelector('.clock').classList.add('game-started');
   }
+
+    hits = 0;
+    remainingTime = 99;
+    hitsDisplay.textContent = hits;
+    timerDisplay.textContent = remainingTime;
+
+    // Start background music
+    backgroundMusic = new Audio('./assets/audio/mixkit-game-level-music-689.wav');
+    backgroundMusic.loop = true;
+    backgroundMusic.play();
+
+    // Start timer
+    timer = setInterval(updateTimer, 1000);
+
+    // Randomize words
+    const randomizedWords = words.sort(() => Math.random() - 0.5);
+
+    // Display first word
+    displayWord(randomizedWords.pop());
+
+    // Enable input
+    wordInput.disabled = false;
+
+    // Add event listener to input
+    wordInput.addEventListener('input', checkWord);
+
+    // Disable start button
+    startButton.disabled = true;
 }
 
-// show Game over
-function gameOver() {
-  endGameElement.innerHTML = `
-  <h1>Time ran out</h1>
-  <p>Your final score is : ${score}</p>
-  <button onclick="location.reload()" style="
-  background: #4e5e73; color: #fff;">Reload</button>
-    `;
-
-  endGameElement.style.display = "flex";
-}
-
-addWordToDOM();
-
-// Typing Event
-text.addEventListener("input", (e) => {
-  const insertedText = e.target.value;
-
-  if (insertedText === randomWord) {
-    addWordToDOM();
-    updateScore();
-
-    e.target.value = "";
-
-    if (difficulty === "hard") {
-      time += 2;
-    } else if (difficulty === "medium") {
-      time += 3;
-    } else {
-      time += 5;
+function updateTimer() {
+    remainingTime--;
+    timerDisplay.textContent = remainingTime;
+    if (remainingTime === 0) {
+        endGame();
     }
+}
 
-    updateTime();
-  }
-});
+function displayWord(word) {
+    wordDisplay.textContent = word;
+}
 
-// Settings btn
-settingBtn.addEventListener("click", () => settings.classList.toggle("hide"));
+function checkWord() {
+    const inputWord = wordInput.value.trim().toLowerCase();
+    const currentWord = wordDisplay.textContent.toLowerCase();
 
-// setting select
-difficultySelect.addEventListener("change", (e) => {
-  difficulty = e.target.value;
-  localStorage.setItem("difficulty", difficulty);
-});
+    if (inputWord === currentWord) {
+        hits++;
+        hitsDisplay.textContent = hits;
+
+        const randomizedWords = words.sort(() => Math.random() - 0.5);
+        if (randomizedWords.length > 0) {
+            displayWord(randomizedWords.pop());
+            wordInput.value = ''; // Clear input field
+        } else {
+            endGame();
+        }
+        
+        const successSound = new Audio('./assets/audio/mixkit-game-flute-bonus-2313.wav');
+        successSound.play();
+    }
+}
+
+function endGame() {
+    clearInterval(timer);
+
+    // Pause background music
+    backgroundMusic.pause();
+
+    // Disable input
+    wordInput.disabled = true;
+    
+    // Calculate percentage
+    const percentage = (hits / 90) * 100;
+
+    // Create score object
+    const date = new Date().toLocaleDateString();
+    const score = new Score(date, hits, percentage);
+
+    // Enable start button for new game
+    startButton.disabled = false;
+}

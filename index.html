@@ -16,40 +16,19 @@
     <link rel="stylesheet" href="./assets/style/index.css" media="all">
     <script src="./assets/script/index.js " type="module"></script>
   </head>
-  <body> <button id="settings-btn" class="settings-btn">
-    ⚙️
-</button>
-
-<div id="settings" class="settings">
-    <form id="settings-form">
-        <div>
-            <label for="difficulty">Difficulty</label>
-            <select id="difficulty">
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
-            </select>
+  <body>
+    <h1 class="header">Word Blitz</h1>
+    <main>
+        <div id="game-container">
+          <button id="start-btn">Start</button>
+            <p class="hits">Hits: <span id="hits">0</span></p>
+            <div class="clock"><p><i class="fa-regular fa-clock"></i><span id="timer"></span></p></div>
+            <p class="randomWord"><span id="word"></span></p> 
+            <input type="text" id="word-input" placeholder="Enter word" autocomplete="off" disabled class="userInput">
         </div>
-    </form>
-</div>
-
-<div class="container">
-    <h2>👩‍💻 Typing Game 👨‍💻</h2>
-    <small>Type the following:</small>
-
-    <h1 id="word"></h1>
-
-    <input type="text" id="text" autocomplete="off" placeholder="Type the word here..." />
-
-    <p class="time-container">Time left: <span id="time">10s</span></p>
-
-    <p class="score-container">Score: <span id="score">0</span></p>
-
-    <div id="end-game-container" class="end-game-container"></div>
-</div>
-
-
-<!-- custom js -->
-<script src="js/script.js"></script>
-</body>
+        <audio id="background-music" loop>
+            <source src="./assets/audio/mixkit-game-level-music-689.wav" type="audio/mpeg">
+        </audio>
+    </main>
+    </body>
 </html>
