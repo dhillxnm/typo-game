@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Manpreet Kaur">
+    <meta name="description" content="Typo-game">
+    <meta name="keywords" content="html, css, web, web development, javascript">
+    <title>Typo-game</title>
+    <link rel="icon" href="./assets/media/favicon.png?v=2" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mrspecht/cdn/reset.css">
+    <link rel="stylesheet" href="./assets/style/index.css" media="all">
+    <script src="./assets/script/index.js " type="module"></script>
+  </head>
+  <body> <button id="settings-btn" class="settings-btn">
+    ⚙️
+</button>
+
+<div id="settings" class="settings">
+    <form id="settings-form">
+        <div>
+            <label for="difficulty">Difficulty</label>
+            <select id="difficulty">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+        </div>
+    </form>
+</div>
+
+<div class="container">
+    <h2>👩‍💻 Typing Game 👨‍💻</h2>
+    <small>Type the following:</small>
+
+    <h1 id="word"></h1>
+
+    <input type="text" id="text" autocomplete="off" placeholder="Type the word here..." />
+
+    <p class="time-container">Time left: <span id="time">10s</span></p>
+
+    <p class="score-container">Score: <span id="score">0</span></p>
+
+    <div id="end-game-container" class="end-game-container"></div>
+</div>
+
+
+<!-- custom js -->
+<script src="js/script.js"></script>
+</body>
+</html>
