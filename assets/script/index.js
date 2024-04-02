@@ -91,6 +91,7 @@ function startTimer() {
     timer = setInterval(updateTimer, 1000);
 }
 
+
 function displayRandomWord() {
     const randomizedWords = words.sort(() => Math.random() - 0.5);
     displayWord(randomizedWords.pop());

@@ -1,13 +1,13 @@
 @charset "utf-8";
 
 body {
-    height: 100vh;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(rgba(70, 22, 72, 0.7), rgba(21, 2, 38, 0.7)), 
-                url(../img/circle.jpg) no-repeat center;
-    background-size: cover;
-    background-blend-mode: overlay;
-    color: #fff;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(rgba(70, 22, 72, 0.7), rgba(21, 2, 38, 0.7)),
+  url(../img/circle.jpg) no-repeat center;
+  background-size: cover;
+  background-blend-mode: overlay;
+  color: #fff;
 }
 
 
@@ -26,12 +26,12 @@ main {
 
 
 #game-container {
-    width: 50%;
-    text-align: center;
-    height: 88vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  width: 50%;
+  text-align: center;
+  height: 88vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 
@@ -53,60 +53,60 @@ main {
 }
 
 
+.clock.game-started {
+  background: url(../img/round.gif) no-repeat center;
+  background-size: cover;
+}
+
 
 #start-btn {
-position: relative;
-bottom: 10%;
-right: -87%;
-width: 86px;
-height: 35px;
-border-radius: 4px;
-margin-top: 20px;
-background-color: #04e26a;
-color: #fff;
+  position: relative;
+  bottom: 10%;
+  right: -87%;
+  width: 86px;
+  height: 35px;
+  border-radius: 4px;
+  margin-top: 20px;
+  background-color: #04e26a;
+  color: #fff;
 } 
 
 
 .hits {
   margin-top: 6.5%;
   margin-bottom: 0%;
-    justify-content: center;
-    display: flex;
-    align-items: center;
-    width: 86px;
-    height: 35px;
-    color: #fff;
-    background-color: #b05203;
-    border-radius: 4px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  width: 86px;
+  height: 35px;
+  color:#fff;
+  background-color: #b05203;
+  border-radius: 4px;
 } 
 
 
- .randomWord {
-    margin-top: 2%;
-    background-color: #fff;
-    width: 39%;
-    color: #000;
-    height: 10%;
-    border-radius: 12px;
-    border: 1px solid #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 42px;
+.randomWord {
+  margin-top: 2%;
+  background-color: #fff;
+  width: 39%;
+  color: #000;
+  height: 10%;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 42px;
 }
+
 
 
 .userInput {
-    margin-top: 2.3%;
-    background-color: #fff;
-    width: 28%;
-    height: 7%;
-    border-radius: 7px;
-    padding: 14px;
+  margin-top: 2.3%;
+  background-color: #fff;
+  width: 28%;
+  height: 7%;
+  border-radius: 7px;
+  padding: 14px;
 }
 
-
-.clock.game-started {
-  background: url(../img/round.gif) no-repeat center;
-  background-size: cover;
-}
