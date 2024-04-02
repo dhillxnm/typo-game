@@ -3,16 +3,23 @@
 /*----------------------------------- */
 /*------------Imported Files--------- */
 /*----------------------------------- */
-
 import { select, listen, getElement, selectAll, create } from './utils.js';
-import { Score } from './score.js';
+import { Score } from './score.js'; 
 
-const startButton = document.getElementById('start-btn');
-const hitsDisplay = document.getElementById('hits');
-const timerDisplay = document.getElementById('timer');
-const wordInput = document.getElementById('word-input');
-const wordDisplay = document.getElementById('word');
 
+/*----------------------------------- */
+/*----------------DOM---------------- */
+/*----------------------------------- */
+const startButton = getElement('start-btn');
+const hitsDisplay = getElement('hits');
+const timerDisplay = getElement('timer');
+const wordInput = getElement('word-input');
+const wordDisplay = getElement('word');
+
+
+/*----------------------------------- */
+/*----------------Array-------------- */
+/*----------------------------------- */
 const words = ['dinosaur', 'love', 'pineapple', 'calendar', 'robot', 'building', 'population',
 'weather', 'bottle', 'history', 'dream', 'character', 'money', 'absolute',
 'discipline', 'machine', 'accurate', 'connection', 'rainbow', 'bicycle',
@@ -28,58 +35,91 @@ const words = ['dinosaur', 'love', 'pineapple', 'calendar', 'robot', 'building',
 'famous', 'league', 'memory', 'leather', 'planet', 'software', 'update', 'yellow',
 'keyboard', 'window'];
 
+
 let timer;
 let hits = 0;
 let remainingTime = 99;
 let backgroundMusic;
-let gameStarted = false; // Track if the game has started
+let gameStarted = false;
 
-startButton.addEventListener('click', startGame);
 
+/*----------------------------------- */
+/*----------------start-------------- */
+/*----------------------------------- */
 function startGame() {
-  if (!gameStarted) {
-      // First time starting the game
-      gameStarted = true;
-      startButton.textContent = 'Restart';
+    if (!gameStarted) {
+        initializeGame();
+    }
+    resetGame();
+    startBackgroundMusic();
+    startTimer();
+    displayRandomWord();
+    enableInput();
+    disableStartButton();
+}
 
-      // Remove the clock icon
-      const clockIcon = document.querySelector('.clock i.fa-regular.fa-clock');
-      if (clockIcon) {
-          clockIcon.remove();
-      }
 
-      // Add background class to .clock element
-      document.querySelector('.clock').classList.add('game-started');
-  }
+function initializeGame() {
+    gameStarted = true;
+    startButton.textContent = 'Restart';
+    removeClockIcon();
+    addGameStartedClass();
+    const wordInputElement = document.getElementById('word-input');
+    if (wordInputElement) {
+        wordInputElement.placeholder = 'Enter word';
+    }
+}
 
+
+function resetGame() {
     hits = 0;
     remainingTime = 99;
     hitsDisplay.textContent = hits;
     timerDisplay.textContent = remainingTime;
+    wordInput.value = ''; 
+}
 
-    // Start background music
+
+function startBackgroundMusic() {
     backgroundMusic = new Audio('./assets/audio/mixkit-game-level-music-689.wav');
     backgroundMusic.loop = true;
     backgroundMusic.play();
+}
 
-    // Start timer
+
+function startTimer() {
     timer = setInterval(updateTimer, 1000);
+}
 
-    // Randomize words
+function displayRandomWord() {
     const randomizedWords = words.sort(() => Math.random() - 0.5);
-
-    // Display first word
     displayWord(randomizedWords.pop());
+}
 
-    // Enable input
+
+function enableInput() {
     wordInput.disabled = false;
-
-    // Add event listener to input
     wordInput.addEventListener('input', checkWord);
+}
 
-    // Disable start button
+
+function disableStartButton() {
     startButton.disabled = true;
 }
+
+
+function removeClockIcon() {
+    const clockIcon = select('.clock i.fa-regular.fa-clock');
+    if (clockIcon) {
+        clockIcon.remove();
+    }
+}
+
+
+function addGameStartedClass() {
+    select('.clock').classList.add('game-started');
+}
+
 
 function updateTimer() {
     remainingTime--;
@@ -89,10 +129,16 @@ function updateTimer() {
     }
 }
 
+
 function displayWord(word) {
     wordDisplay.textContent = word;
 }
 
+
+
+/*----------------------------------- */
+/*-------------validation------------ */
+/*----------------------------------- */
 function checkWord() {
     const inputWord = wordInput.value.trim().toLowerCase();
     const currentWord = wordDisplay.textContent.toLowerCase();
@@ -104,32 +150,28 @@ function checkWord() {
         const randomizedWords = words.sort(() => Math.random() - 0.5);
         if (randomizedWords.length > 0) {
             displayWord(randomizedWords.pop());
-            wordInput.value = ''; // Clear input field
+            wordInput.value = '';
         } else {
             endGame();
         }
-        
         const successSound = new Audio('./assets/audio/mixkit-game-flute-bonus-2313.wav');
         successSound.play();
     }
 }
 
+
+/*----------------------------------- */
+/*-----------------end--------------- */
+/*----------------------------------- */
 function endGame() {
     clearInterval(timer);
-
-    // Pause background music
     backgroundMusic.pause();
-
-    // Disable input
     wordInput.disabled = true;
-    
-    // Calculate percentage
     const percentage = (hits / 90) * 100;
-
-    // Create score object
     const date = new Date().toLocaleDateString();
     const score = new Score(date, hits, percentage);
-
-    // Enable start button for new game
     startButton.disabled = false;
 }
+
+
+listen('click', startButton, startGame);

@@ -34,13 +34,14 @@ main {
     align-items: center;
 }
 
+
 .clock {
   margin-top: 2%;
-  background-color: #fff;
+  background: url(../img/clock.jpg) no-repeat center;
   background-size: cover;
   color: #000;
-  width: 144px;
-  height: 144px;
+  width: 142px;
+  height: 142px;
   border-radius: 50%;
   text-align: center;
   display: flex;
@@ -56,55 +57,54 @@ main {
 #start-btn {
 position: relative;
 bottom: 10%;
-right: -86%;
+right: -87%;
 width: 86px;
 height: 35px;
 border-radius: 4px;
 margin-top: 20px;
+background-color: #04e26a;
+color: #fff;
 } 
 
 
 .hits {
-    margin-top: 5.5%;
+  margin-top: 6.5%;
+  margin-bottom: 0%;
     justify-content: center;
     display: flex;
     align-items: center;
     width: 86px;
     height: 35px;
-    color: #000;
-    background-color: white;
+    color: #fff;
+    background-color: #b05203;
     border-radius: 4px;
 } 
 
 
-/* .clock i {
-    position: relative;
-    right: -3px;
-} */
-
  .randomWord {
     margin-top: 2%;
     background-color: #fff;
-    width: 37%;
+    width: 39%;
     color: #000;
-    height: 9%;
+    height: 10%;
     border-radius: 12px;
     border: 1px solid #000;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 21px;
+    font-size: 42px;
 }
 
 
 .userInput {
-    margin-top: 2%;
+    margin-top: 2.3%;
     background-color: #fff;
     width: 28%;
     height: 7%;
     border-radius: 7px;
     padding: 14px;
 }
+
 
 .clock.game-started {
   background: url(../img/round.gif) no-repeat center;
