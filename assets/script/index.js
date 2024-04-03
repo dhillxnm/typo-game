@@ -15,8 +15,6 @@ const hitsDisplay = getElement('hits');
 const timerDisplay = getElement('timer');
 const wordInput = getElement('word-input');
 const wordDisplay = getElement('word');
-const countdownVideo = getElement('countdown-video');
-
 
 
 /*----------------------------------- */
@@ -44,43 +42,21 @@ let remainingTime = 99;
 let backgroundMusic;
 let gameStarted = false;
 
-countdownVideo.style.display = 'none';
 
 /*----------------------------------- */
 /*----------------start-------------- */
 /*----------------------------------- */
-let countdownFinished = false; // Variable to track countdown status
-
 function startGame() {
     if (!gameStarted) {
         initializeGame();
     }
+    resetGame();
+    startBackgroundMusic();
+    startTimer();
+    displayRandomWord();
+    enableInput();
     disableStartButton();
-
-    countdownVideo.style.display = 'block';
-    countdownVideo.play();
-
-    const sound = new Audio('/assets/audio/coundown sound.mp3');
-    sound.play();
-
-    setTimeout(() => {
-        countdownFinished = true; 
-        countdownVideo.style.display = 'none';
-        wordInput.focus();
-        enableGameFunctionality(); 
-    }, 5900); 
-}
-
-function enableGameFunctionality() {
-    if (countdownFinished) { 
-        countdownVideo.pause();
-        countdownVideo.style.display = 'none'; 
-        resetGame();
-        startTimer();
-        displayRandomWord();
-        enableInput();
-        startBackgroundMusic();
-    }
+    wordInput.focus();
 }
 
 
