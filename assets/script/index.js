@@ -62,12 +62,6 @@ let scores = JSON.parse(localStorage.getItem('scores')) || [];
 /*------------------------------------------ */
 /*-------------typing-section--------------- */
 /*------------------------------------------ */
-// function inputFocus(event) {
-//     if (event.target !== text) {
-//         text.focus();
-//     }
-// }
-
 
 function getRandomWord() {
     const randomIndex = Math.floor(Math.random() * wordsCopy.length);
@@ -95,7 +89,6 @@ function timeDecline() {
         }
     }
 }
-
 
 
 function displayCountDown() {
@@ -157,7 +150,6 @@ function addRandomWords(newWord) {
 /*------------------------------------------ */
 /*-------------Game-over section------------ */
 /*------------------------------------------ */
-
 function gameOver() {
     pauseBackgroundMusic();
     displayEndGameMessage();
@@ -168,6 +160,7 @@ function gameOver() {
     updateGameStatus();
     saveFinalScore();
     updateUI();
+    
 }
 
 function pauseBackgroundMusic() {
@@ -203,11 +196,6 @@ function displayScoreBoard() {
 function displayRestartButton() {
     const restartButton = document.getElementById('restart-btn');
     restartButton.classList.remove('hide');
-}
-
-
-function displayEndGameContainer() {
-    endGameElement.style.display = "flex";
 }
 
 
@@ -345,23 +333,32 @@ function displayScoreList() {
 
 function createScoreListItem(score, index) {
     const listItem = document.createElement('li');
-    const formattedDateTime = formatDateTime(score.date);
-    listItem.textContent = `# ${index + 1} \u00A0 ${score.hits} words \u00A0 
-    ${score.percentage.toFixed(2)}% \u00A0 ${formattedDateTime}`;
+    const date = new Date(score.date);
+    const formattedDateTime = formatDateTime(date);
+    listItem.textContent = `# ${index + 1} \u00A0 ${score.hits} hits \u00A0 ${score.percentage.toFixed(2)}% \u00A0 ${formattedDateTime}`;
     return listItem;
 }
 
 
 function formatDateTime(date) {
     const options = {
-        year: 'numeric',
-        month: 'short',
         day: 'numeric',
+        month: 'long',
+        year: 'numeric',
         hour: 'numeric',
         minute: '2-digit',
         hour12: true,
     };
-    return date.toLocaleString(undefined, options);
+    return date.toLocaleString('en-US', options);
+}
+
+
+function displayEndGameContainer() {
+    endGameElement.style.display = "flex";
+    restartButton.addEventListener('click', () => {
+        endGameElement.style.display = 'none';
+        scoreBoard.style.display = 'none';
+    });
 }
 
 
@@ -377,9 +374,8 @@ function clearScoreboard() {
     if (scores.length <= 1) {
         return;
     }
-    localStorage.removeItem('scores');
-    scores = [];
-    displayScoreboard();
+    scoreboardContainer.style.display = 'none';
+    clearScoreboardButton.style.display = 'none';
 }
 
 
@@ -416,13 +412,17 @@ function hideElements() {
 }
 
 
-
 scoreBoard.addEventListener('click', toggleScoreboard);
 
 scoreBoard.addEventListener('click', function () {
     clearScoreboardButton.style.display = 'block';
 });
 
+
+listen('click', clearScoreboardButton, () => {
+    scoreboardContainer.style.display = 'none';
+    clearScoreboardButton.style.display = 'none';
+})
 
 
 text.addEventListener("input", (e) => {
@@ -444,6 +444,9 @@ text.addEventListener("input", (e) => {
     }
 });
 
+/*------------------------------------------ */
+/*-----------------Count-down--------------- */
+/*------------------------------------------ */
 const countdownOverlay = document.getElementById('countdown-overlay');
 const countdownElement = document.getElementById('countdown');
 const readyElement = document.getElementById('ready');

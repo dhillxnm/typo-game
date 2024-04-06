@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 
+
 body {
     display: flex;
     align-items: center;
@@ -13,6 +14,7 @@ body {
     font-family: 'Nova Square', sans-serif;
     background-color: rgb(146, 66, 175);
 }
+
 
 .container {
   width: 340px;
@@ -38,6 +40,7 @@ button {
     padding: 5px 15px;
 }
 
+
 select {
     width: 200px;
     padding: 5px;
@@ -47,6 +50,7 @@ select {
     border-radius: 0;
     background-color: #a7c5e3;
 }
+
 
 select:focus,
 button:focus {
@@ -75,13 +79,14 @@ button:focus {
     transition: transform 0.3s ease-in-out;
 }
 
+
 .settings.hide {
     transform: translateY(-100%);
 }
 
+
 .title {
   font-size: 25px;
-  /* font-family: 'Finger Paint', Arial, Helvetica, sans-serif; */
   font-weight: 600;
   padding: 0px;
   border-radius: 4px;
@@ -90,6 +95,7 @@ button:focus {
   text-align: left;
 }
 
+
 #word {
   padding: 27px 12px;
   font-size: 40px;
@@ -97,6 +103,7 @@ button:focus {
   border-radius: 9px;
   background-color: rgb(146, 66, 175)
 }
+
 
 input {
   font-family: 'Nova Square', Geneva, Tahoma, sans-serif;
@@ -109,28 +116,31 @@ input {
   margin-top: 1px;
 }
 
+
 .creator-name {
     margin-top: 5px;
     margin-bottom: 5px;
 }
 
+
 .score-container {
   position: absolute;
-  bottom: 83%;
-  right: 4%;
-  margin-top: 10px;
+  bottom: 81%;
+  right: 5%;
+  margin-top: 13px;
   z-index: 1;
-  width: 55px;
-  height: 55px;
+  width: 58px;
+  height: 58px;
   font-size: 14px;
   text-align: center;
-  background-color: #ccac00;
+  background-color: #42af5b;
   color: #000;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 
 .time-container {
   position: absolute;
@@ -148,32 +158,34 @@ input {
   justify-content: center;
 }
 
+
 .end-game-container {
-    background-color: red;
+    background-color: #466da8;
     display: none;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
     position: absolute;
-    top: 19%;
-    left: -14%;
-    width: 125%;
-    height: 60%;
+    top: 21%;
+    left: -5%;
+    width: 111%;
+    height: 57%;
     z-index: 1;
 }
+
 
 .end-game-container.hide {
     display: none; 
 }
 
+
 #start-btn-top-left:hover {
     background-color: #a00f0f;
 }
 
+
 #start-btn-top-left {
   background-color: #ff0000;
   position: fixed;
-  /* font-family: 'Nova Square', sans-serif; */
   border: none;
   padding: 10px 20px;
   font-weight: 500;
@@ -183,10 +195,10 @@ input {
   z-index: 2;
 }
 
+
 #restart-btn {
   background-color: #ff0000;
   position: fixed;
-  /* font-family: 'Nova Square', sans-serif; */
   border: none;
   padding: 8px 6px;
   font-weight: 500;
@@ -198,14 +210,17 @@ input {
   z-index: 2;
 }
 
+
 #restart-btn:hover {
     transition: 0.5s ease-in-out;
     background-color: #818080;
 }
 
+
 .hide {
     display: none;
 }
+
 
 #countdown-overlay {
     position: fixed;
@@ -223,32 +238,38 @@ input {
     font-size: 2em;
 }
 
+
 #countdown {
     margin-bottom: 20px;
 }
+
 
 #ready, #set, #go {
     display: none;
 }
 
+
 #restart-button:hover {
     background-color: #a00f0f;
 }
+
 
 .scoreboard-container {
     display: none;
     position: fixed;
     top: 50%;
-    right: 0;  /* Adjusted to be on the right side */
+    right: 0;
     transform: translate(0, -50%);
-    background-color: rgba(246, 208, 16, 0.9); 
+    background-color: rgb(122, 140, 153, 0.99);
     padding: 20px;
     height: 100vh;  
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     z-index: 2;
     max-height: 100vh;
     overflow-y: auto;
+    font-family: monospace;
 }
+
 
 .scoreboard-container ul {
     list-style: none;
@@ -256,16 +277,19 @@ input {
     margin: 0;
 }
 
+
 .scoreboard-container li {
     margin: 10px 0;
     font-size: 16px;
     text-align: left;
 }
 
+
 #no-scores {
     display: none;
     z-index: -2;
 }
+
 
 #show-scoreboard-btn {
     color: #fff;
@@ -285,10 +309,12 @@ input {
     right: 22%;
 }
 
+
 #show-scoreboard-btn:hover {
     transition: 0.5s ease-in-out;
     background-color: #000000;
 }
+
 
 .clear-scoreboard-btn {
     color: #fff;
@@ -307,21 +333,15 @@ input {
     right: 10px;
 }
 
+
 .clear-scoreboard-btn:hover {
     background-color: #a7c5e3; 
     transition: 0.5s ease-in-out;
 }
 
-/* animation (delay) to all  transalte 0 -12 to translate 12 -000
-delay  */
-
-/* animation scale 1.02 to 1
-monospace font  */
-
 
 .congratulations {
     background-color: #818080;
     color: #000;
-
+    margin-top: 30px;
 }
-
