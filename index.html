@@ -1,34 +1,53 @@
+
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
+<html lang="en">
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="Manpreet Kaur">
-    <meta name="description" content="Typo-game">
-    <meta name="keywords" content="html, css, web, web development, javascript">
-    <title>Typo-game</title>
-    <link rel="icon" href="./assets/media/favicon.png?v=2" type="image/x-icon">
+    <meta name="author" content=" Manpreet Kaur">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mrspecht/cdn/reset.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nova+Square&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/style/index.css" media="all">
-    <script src="./assets/script/index.js " type="module"></script>
-  </head>
-  <body>
-    <h1 class="header">Word Blitz</h1>
-    <main>
-        <div id="game-container">
-          <button id="start-btn">Start</button>
-          <p class="hits">Hits: <span id="hits">0</span></p>
-          <div class="clock"><p><i class="fa-regular fa-clock"></i><span id="timer"></span></p></div>
-          <p class="randomWord"><span id="word"></span></p> 
-          <input type="text" id="word-input" placeholder="click on start" autocomplete="off" disabled class="userInput">
-        </div>
-        <audio id="background-music" loop>
-          <source src="./assets/audio/mixkit-game-level-music-689.wav" type="audio/mpeg">
-        </audio>
-    </main>
-  </body>
+    <script src="./assets/script/index.js" type="module"></script>
+    <title>Word Blitz</title>
+</head>
+<body>
+    <audio id="background-music" loop>
+        <source src="./assets/audio/mixkit-game-level-music-689.wav" type="audio/mp3">
+        Your browser does not support the audio tag.
+    </audio>
+    <div id="settings" class="settings"></div>
+     <div id="countdown-overlay" class="hide">
+        <div id="countdown"></div>
+        <div id="ready">Ready?</div>
+        <div id="set">Set</div>
+        <div id="go">Go!</div>
+    </div> 
+    <div class="container shadow">
+        <h2 class="title">Word Blitz</h2>
+        <h1 id="word"></h1>
+        <input type="text" id="text" autocomplete="off" placeholder="Type the word here..." />
+        <p class="creator-name">Created by Manpreet Kaur</p>
+          <div class="time-container"><span id="time">15s</span></div>
+        <p class="score-container">Score:  <span id="score">0</span></p>
+        <button id="restart-btn"  class="settings-btn">
+            Restart
+        </button>
+        <div id="end-game-container" class="end-game-container"></div>
+ 
+        <button id="show-scoreboard-btn" class="hide" >Show Scoreboard</button>
+    </div>
+    <div id="scoreboard-container" class="scoreboard-container">
+    </div>
+    <button id="clear-scoreboard-btn" class="clear-scoreboard-btn">Clear Scoreboard</button>
+
+    <button id="start-btn-top-left">
+        Start
+    </button>
+</body>
 </html>

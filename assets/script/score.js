@@ -1,19 +1,21 @@
-export class Score {
+'use strict';
+
+class Score {
+    #date;
+    #hits;
+    #percentage;
+  
+  
     constructor(date, hits, percentage) {
-        this._date = date;
-        this._hits = hits;
-        this._percentage = percentage;
-    }
+      this.#date = date;
+      this.#hits = hits;
+      this.#percentage = percentage;
+    } 
 
-    get date() {
-        return this._date;
-    }
+    get date() { return this.#date;}
+    get hits() { return this.#hits;}
+    get percentage() { return this.#percentage;}
+} 
 
-    get hits() {
-        return this._hits;
-    }
 
-    get percentage() {
-        return this._percentage;
-    }
-}
+export { Score };
